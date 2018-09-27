@@ -18,6 +18,25 @@ rootProject.allprojects {
         jcenter()
         maven { url "https://jitpack.io" }
     }
+
+
+    subprojects {
+        project.configurations.all {
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.android.support'
+                        && !details.requested.name.contains('multidex')) {
+                    details.useVersion "$supportLibraryVersion"
+                }
+            }
+        }
+    }
+
+}
+
+ext {
+    // App dependencies
+    supportLibraryVersion = '27.1.1'
+
 }
 
 apply plugin: 'com.android.library'
@@ -26,7 +45,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 18
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -36,5 +55,6 @@ android {
 
 
 dependencies {
-    implementation 'com.github.caijinglong:android_image_selector:0.9.2'
+    implementation 'com.github.caijinglong:android_image_selector:0.9.4'
 }
+

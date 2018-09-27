@@ -17,27 +17,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await Foto.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
@@ -50,7 +29,29 @@ class _MyAppState extends State<MyApp> {
         body: new Center(
           child: new Text('Running on: $_platformVersion\n'),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _pickImage,
+        ),
       ),
     );
+  }
+
+  void _pickImage() async {
+    var resultList = await Foto.pickImageList(
+      option: FotoOption(
+        itemRadio: 1.0,
+        padding: 1,
+        maxSelected: 3,
+        // themeColor: Colors.blue,
+        rowCount: 2,
+        dividerColor: Colors.red,
+        // textColor: Colors.yellowAccent,
+      ),
+    );
+    if (resultList == null) {
+      print("取消");
+    } else {
+      print("获取结果为 $resultList");
+    }
   }
 }
