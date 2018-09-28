@@ -41,11 +41,11 @@ class _MyAppState extends State<MyApp> {
       option: FotoOption(
         itemRadio: 1.0,
         padding: 1,
-        maxSelected: 3,
-        // themeColor: Colors.blue,
-        rowCount: 2,
+        maxSelected: 6,
+        themeColor: Colors.green,
+        rowCount: 5,
         dividerColor: Colors.red,
-        // textColor: Colors.yellowAccent,
+        textColor: Colors.yellowAccent,
       ),
     );
     if (resultList == null) {

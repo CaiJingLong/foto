@@ -55,6 +55,6 @@ android {
 
 
 dependencies {
-    implementation 'com.github.caijinglong:android_image_selector:0.9.4'
+    implementation 'com.github.caijinglong:android_image_selector:0.9.5'
 }
 
